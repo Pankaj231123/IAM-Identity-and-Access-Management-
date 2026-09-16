@@ -1,0 +1,17 @@
+# Environment
+.env
+
+# Build artifacts
+/tmp
+/bin
+iam-service
+
+# Go-specific
+*.exe
+*.test
+*.out
+vendor/
+
+# IDE
+.vscode/
+.idea/
