@@ -3,11 +3,17 @@ package hash
 import (
 	"crypto/rand"
 	"encoding/base64"
-	"errors"
 	"fmt"
-	"time"
+	"golang.org/x/crypto/argon2"
 )
 
-func argon2id(argonMemory, argonIterations, argonSaltLength, argonKeyLength uint32, argonParallelism uint8, password string) (string, error) {
+const (
+	argonMemory      = 65536
+	argonIterations  = 3
+	argonParallelism = 2
+	argonSaltLength  = 16
+	argonKeyLength   = 32
+)
+func HashPassword(password string) (string, error) {
 
 }
