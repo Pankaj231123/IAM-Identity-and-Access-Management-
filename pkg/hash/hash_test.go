@@ -3,13 +3,32 @@ package hash
 import "testing"
 
 func TestHashAndVerifyPassword(t *testing.T) {
-	// 1. Hash a known password, confirm no error
-	//    use t.Fatalf(...) if hashing itself fails — no point continuing
-	
+	password := "Correct horse battery staple!42"
 
-	// 2. Verify correct password returns true, nil
-	//    use t.Errorf(...) if it returns false or an error
+	encodedHash, err := HashPassword(password)
+	if err != nil {
+		t.Fatalf("HashPassword() error = %v", err)
+	}
+	if encodedHash == "" {
+		t.Fatal("HashPassword() returned an empty hash")
+	}
+	if encodedHash == password {
+		t.Fatal("HashPassword() returned the plaintext password")
+	}
 
-	// 3. Verify wrong password returns false, nil
-	//    use t.Errorf(...) if it returns true (that would be a real security bug)
+	matched, err := VerifyPassword(password, encodedHash)
+	if err != nil {
+		t.Fatalf("VerifyPassword() with correct password error = %v", err)
+	}
+	if !matched {
+		t.Error("VerifyPassword() did not match the correct password")
+	}
+
+	matched, err = VerifyPassword("wrong password", encodedHash)
+	if err != nil {
+		t.Fatalf("VerifyPassword() with wrong password error = %v", err)
+	}
+	if matched {
+		t.Error("VerifyPassword() matched an incorrect password")
+	}
 }
