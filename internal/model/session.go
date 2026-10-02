@@ -1,17 +1,19 @@
 package model
 
 import (
-	"github.com/google/uuid"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type Session struct {
-	ID        uuid.UUID  `json:"id" gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
-	UserID    uuid.UUID  `json:"user_id" gorm:"type:uuid;not null"`
-	TokenHash string     `json:"-" gorm:"unique;not null"`
-	IpAddress string     `json:"ip_address"`
-	UserAgent string     `json:"user_agent"`
-	RevokedAt *time.Time `json:"revoked_at" gorm:"default:null"`
-	CreatedAt time.Time  `json:"created_at" gorm:"autoCreateTime"`
-	ExpiresAt time.Time  `json:"expires_at" gorm:"not null"`
+	ID         uuid.UUID  `json:"id" gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
+	UserID     uuid.UUID  `json:"user_id" gorm:"type:uuid;not null"`
+	TokenHash  string     `json:"-" gorm:"unique;not null"`
+	IpAddress  string     `json:"ip_address"`
+	UserAgent  string     `json:"user_agent"`
+	RevokedAt  *time.Time `json:"revoked_at" gorm:"default:null"`
+	CreatedAt  time.Time  `json:"created_at" gorm:"autoCreateTime"`
+	ExpiresAt  time.Time  `json:"expires_at" gorm:"not null"`
+	LastSeenAt *time.Time `json:"last_seen_at" gorm:"default:null"`
 }
